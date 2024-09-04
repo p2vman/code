@@ -1,7 +1,5 @@
 # Creating and Using an Instance
 
-### Example
-
 ```javascript
 class Person {
     constructor(name, age) {

@@ -1,9 +1,5 @@
 This example demonstrates basic concepts in Node.js including classes, methods, and constructors.
 
-## 1. Classes
-
-### Example
-
 ```javascript
 class Person {
     constructor(name, age) {

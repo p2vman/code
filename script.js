@@ -58,15 +58,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         item.appendChild(link);
                         exampleList.appendChild(item);
                     } else if (example.type === 1) {
-                        const item = document.createElement('h2');
-                        item.innerText = example.name;
-                        exampleList.appendChild(item);
                         example.entry.forEach(subExample => {
                             const item = document.createElement('div');
                             item.classList.add('example-item');
                             const link = document.createElement('a');
                             link.href = `example-page.html?lang=${language}&select=${subExample.file}`;
-                            link.textContent = subExample.name;
+                            link.textContent = `${example.name} - ${subExample.name}`;
                             item.appendChild(link);
                             exampleList.appendChild(item);
                         });
