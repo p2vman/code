@@ -58,6 +58,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         item.appendChild(link);
                         exampleList.appendChild(item);
                     } else if (example.type === 1) {
+                        const item = document.createElement('h2');
+                        item.innerText = example.name;
+                        exampleList.appendChild(item);
                         example.entry.forEach(subExample => {
                             const item = document.createElement('div');
                             item.classList.add('example-item');
