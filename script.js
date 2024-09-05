@@ -48,27 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 exampleList.innerHTML = '';
-                data.forEach(example => {
-                    if (example.type === 0) {
-                        const item = document.createElement('div');
-                        item.classList.add('example-item');
-                        const link = document.createElement('a');
-                        link.href = `example-page.html?lang=${language}&select=${example.file}`;
-                        link.textContent = example.name;
-                        item.appendChild(link);
-                        exampleList.appendChild(item);
-                    } else if (example.type === 1) {
-                        example.entry.forEach(subExample => {
-                            const item = document.createElement('div');
-                            item.classList.add('example-item');
-                            const link = document.createElement('a');
-                            link.href = `example-page.html?lang=${language}&select=${subExample.file}`;
-                            link.textContent = `${example.name} - ${subExample.name}`;
-                            item.appendChild(link);
-                            exampleList.appendChild(item);
-                        });
-                    }
-                });
+                render(exampleList, data);
             })
             .catch(err => {
                 exampleList.innerHTML = '<p>Error loading examples.</p>';
@@ -100,3 +80,25 @@ function renderExamples(examples, container) {
 document.getElementById('backButton').addEventListener('click', function() {
     window.history.back();
 });
+
+
+function render(root, list) {
+    list.forEach(example => {
+        if (example.type === 0) {
+            const item = document.createElement('div');
+            item.classList.add('example-item');
+            const link = document.createElement('a');
+            link.href = `example-page.html?lang=${language}&select=${example.file}`;
+            link.textContent = example.name;
+            item.appendChild(link);
+            root.appendChild(item);
+        } else if (example.type === 1) {
+            const lv = document.createElement('div');
+            const h2 = document.createElement('h2');
+            h2.innerHTML=example.name;
+            lv.appendChild(h2);
+            render(lv, example.entry);
+            root.appendChild(lv);
+        }
+    });
+}
