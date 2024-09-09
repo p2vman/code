@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 exampleList.innerHTML = '';
-                render(exampleList, data);
+                render(exampleList, data, language);
             })
             .catch(err => {
                 exampleList.innerHTML = '<p>Error loading examples.</p>';
@@ -82,7 +82,7 @@ document.getElementById('backButton').addEventListener('click', function() {
 });
 
 
-function render(root, list) {
+function render(root, list, language) {
     list.forEach(example => {
         if (example.type === 0) {
             const item = document.createElement('div');
@@ -97,7 +97,7 @@ function render(root, list) {
             const h2 = document.createElement('h2');
             h2.innerHTML=example.name;
             lv.appendChild(h2);
-            render(lv, example.entry);
+            render(lv, example.entry, language);
             root.appendChild(lv);
         }
     });
